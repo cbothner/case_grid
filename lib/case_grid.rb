@@ -3,6 +3,8 @@ loader = Zeitwerk::Loader.for_gem
 loader.setup
 
 require 'forwardable'
+require 'rcomposite'
+require 'rmagick'
 
 class CaseGrid
   class Error < StandardError; end
@@ -28,6 +30,7 @@ class CaseGrid
   end
 
   def generate
+    overlay_gradient
     create_grid
     rotate
     render
@@ -45,5 +48,11 @@ class CaseGrid
 
   def rotate
     canvas.rotate(config.angle)
+  end
+
+  def overlay_gradient
+    canvas.fill_layer RComposite::Gradient, 0, 0, 50, 0, '#999', '#000' do
+      mode RComposite::Screen
+    end
   end
 end
