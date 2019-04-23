@@ -24,6 +24,6 @@ RSpec.describe CaseGrid do
     image = CaseGrid.generate *files
     expect(image).to be_a Magick::Image
 
-    image.write 'tmp/output.jpg'
+    image.write 'example.jpg'
   end
 end
